@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Arma</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1c1c1c;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #000;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .navbar h1 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.5em;
+            letter-spacing: 2px;
+            text-align: center;
+            width: 100%;
+        }
+        .container {
+            width: 80%;
+            margin: 100px auto 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+        }
+        .form-group .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-group button.submit {
+            background-color: #007bff;
+        }
+        .form-group button.submit:hover {
+            background-color: #0056b3;
+        }
+        .form-group button.cancel {
+            background-color: #dc3545;
+        }
+        .form-group button.cancel:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>CATÁLOGO DE ARMAS - Editar Arma</h1>
+    </div>
+    <div class="container">
+        <h2>Editar Arma</h2>
+        <form method='post' action="/editar/{{ weapon.numero_de_serie }}">
+            <div class="form-group">
+                <label for="numero_de_serie">Número de Série:</label>
+                <input type="number" id="numero_de_serie" name="numero_de_serie" value="{{ weapon.numero_de_serie }}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="classe">Classe:</label>
+                <select id="classe" name="classe" required>
+                    <option value="">Selecione...</option>
+                    <option value="Rifle" {% if weapon.classe == "Rifle" %} selected {% endif %}>Rifle</option>
+                    <option value="Pistola" {% if weapon.classe == "Pistola" %} selected {% endif %}>Pistola</option>
+                    <option value="Revólver" {% if weapon.classe == "Revólver" %} selected {% endif %}>Revólver</option>
+                    <option value="Espingarda" {% if weapon.classe == "Espingarda" %} selected {% endif %}>Espingarda</option>
+                    <option value="Carabina" {% if weapon.classe == "Carabina" %} selected {% endif %}>Carabina</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="calibre">Calibre:</label>
+                <select id="calibre" name="calibre" required>
+                    <option value="">Selecione...</option>
+                    <option value=".22" {% if weapon.calibre == ".22" %} selected {% endif %}>.22</option>
+                    <option value=".357" {% if weapon.calibre == ".357" %} selected {% endif %}>.357</option>
+                    <option value=".38spl" {% if weapon.calibre == ".38spl" %} selected {% endif %}>.38spl</option>
+                    <option value=".38acp" {% if weapon.calibre == ".38acp" %} selected {% endif %}>.38acp</option>
+                    <option value=".40" {% if weapon.calibre == ".40" %} selected {% endif %}>.40</option>
+                    <option value="12ga" {% if weapon.calibre == "12ga" %} selected {% endif %}>12ga</option>
+                    <option value="5,56nato" {% if weapon.calibre == "5,56nato" %} selected {% endif %}>5,56nato</option>
+                    <option value="9mm" {% if weapon.calibre == "9mm" %} selected {% endif %}>9mm</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" value="{{ weapon.modelo }}" required>
+            </div>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <select id="marca" name="marca" required>
+                    <option value="">Selecione...</option>
+                    <option value="Glock" {% if weapon.marca == "Glock" %} selected {% endif %}>Glock</option>
+                    <option value="Taurus" {% if weapon.marca == "Taurus" %} selected {% endif %}>Taurus</option>
+                    <option value="CZ" {% if weapon.marca == "CZ" %} selected {% endif %}>CZ</option>
+                    <option value="Beretta" {% if weapon.marca == "Beretta" %} selected {% endif %}>Beretta</option>
+                    <option value="Rossi" {% if weapon.marca == "Rossi" %} selected {% endif %}>Rossi</option>
+                    <option value="Imbel" {% if weapon.marca == "Imbel" %} selected {% endif %}>Imbel</option>
+                    <option value="S&W" {% if weapon.marca == "S&W" %} selected {% endif %}>S&W</option>
+                    <option value="Winchester" {% if weapon.marca == "Winchester" %} selected {% endif %}>Winchester</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="capacidade">Capacidade:</label>
+                <input type="number" id="capacidade" name="capacidade" value="{{ weapon.capacidade }}" required>
+            </div>
+            <div class="form-group button-group">
+                <button type="submit" class="submit"onclick="window.location.href='/armas'">Confirmar Edição</button>
+                <button type="button" class="cancel" onclick="window.location.href='/armas'">Cancelar Edição</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
